@@ -3,6 +3,14 @@
 # Originally by Andreas Nilsson: http://www.andreasn.se/blog/?p = 96
 # Requires python and istanbul: http://live.gnome.org/Istanbul
 
+print """
+Default camera position is bottom right.
+To change, use 'top' and 'left' as arguments.
+Disable camera with 'nocam'.
+If you are conducting a RTA (= retrospective thinking aloud),
+use 'shift' to set the camera video next to the one already there.
+"""
+
 import pygtk
 pygtk.require("2.0")
 import gobject
@@ -14,6 +22,7 @@ import gst
 import signal
 import subprocess
 import os.path
+import sys
 
 
 def clean_shutdown(p):
@@ -58,6 +67,24 @@ cam_h = 200
 cam_opacity = 0.8
 v4l_device = "/dev/video0"
 
+cam = True
+cam_x = out_w - cam_w
+cam_y = out_h - cam_h
+
+# Optional parameters for setting cam position
+for arg in sys.argv:
+    if arg == "nocam":
+        cam = False
+        cam_opacity = 0
+    if arg == "shift":
+        cam_x -= cam_w
+    if arg == "left":
+        cam_x = 0
+        if arg == "shift":
+            cam_x += cam_w * 2
+    if arg == "top":
+        cam_y = 0
+
 
 p = gst.parse_launch("""videomixer name = mix ! ffmpegcolorspace ! queue ! theoraenc ! oggmux name = mux ! filesink location = %s
 istximagesrc name = xsrc use-damage = false ! videorate ! video/x-raw-rgb,framerate = 10/1 ! ffmpegcolorspace ! videoscale method = 1 ! video/x-raw-yuv,width = %d,height = %d ! mix.sink_0
@@ -67,8 +94,8 @@ alsasrc name = asrc ! queue ! audioconvert ! vorbisenc ! mux.""" % \
 
 mix = p.get_by_name("mix")
 cam_pad = mix.get_pad("sink_1")
-cam_pad.set_property("xpos", out_w - cam_w)
-cam_pad.set_property("ypos", out_h - cam_h)
+cam_pad.set_property("xpos", cam_x)
+cam_pad.set_property("ypos", cam_y)
 cam_pad.set_property("alpha", cam_opacity)
 cam_pad.set_property("zorder", 1)
 
