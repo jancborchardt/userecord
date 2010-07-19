@@ -12,6 +12,8 @@ pygst.require("0.10")
 import gst
 
 import signal
+import subprocess
+
 
 def clean_shutdown(p):
     camsrc = p.get_by_name("camsrc")
@@ -28,17 +30,26 @@ def clean_shutdown(p):
 
 def interrupt():
     loop.quit()
+
+# This function takes Bash commands and returns them
+# Taken from http://magazine.redhat.com/2008/02/07/python-for-bash-scripters-a-well-kept-secret/
+def runBash(cmd):
+    p = subprocess.Popen(cmd, shell = True, stdout = subprocess.PIPE)
+    out = p.stdout.read().strip()
+    return out
+
     
 out_file = "final.ogv"
 
-out_w = 1024
-out_h = 768
+# Automatically get screen dimensions
+out_w = int(runBash("xdpyinfo | grep dimensions | cut -d' ' -f7 | cut -d'x' -f1"))
+out_h = int(runBash("xdpyinfo | grep dimensions | cut -d' ' -f7 | cut -d'x' -f2"))
 
 cam_w = 300
 cam_h = 200
 cam_opacity = 0.8
-
 v4l_device = "/dev/video0"
+
 
 p = gst.parse_launch("""videomixer name = mix ! ffmpegcolorspace ! queue ! theoraenc ! oggmux name = mux ! filesink location = %s
 istximagesrc name = xsrc use-damage = false ! videorate ! video/x-raw-rgb,framerate = 10/1 ! ffmpegcolorspace ! videoscale method = 1 ! video/x-raw-yuv,width = %d,height = %d ! mix.sink_0
@@ -52,6 +63,7 @@ cam_pad.set_property("xpos", out_w - cam_w)
 cam_pad.set_property("ypos", out_h - cam_h)
 cam_pad.set_property("alpha", cam_opacity)
 cam_pad.set_property("zorder", 1)
+
 
 p.set_state(gst.STATE_PLAYING)
 print "Capturing..."
