@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+# Pongo, an inexpensive UI lab
+# Originally by Andreas Nilsson: http://www.andreasn.se/blog/?p=96
+# Requires python and istanbul: http://live.gnome.org/Istanbul
 
 import pygtk
 pygtk.require("2.0")
