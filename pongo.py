@@ -13,6 +13,7 @@ import gst
 
 import signal
 import subprocess
+import os.path
 
 
 def clean_shutdown(p):
@@ -38,8 +39,15 @@ def runBash(cmd):
     out = p.stdout.read().strip()
     return out
 
-    
-out_file = "final.ogv"
+
+out_file = "pongo-"
+count = 1
+# Do not overwrite existing recordings
+while(os.path.isfile(out_file + str(count) + ".ogv")):
+    count = count + 1
+
+out_file += str(count)
+out_file += ".ogv"
 
 # Automatically get screen dimensions
 out_w = int(runBash("xdpyinfo | grep dimensions | cut -d' ' -f7 | cut -d'x' -f1"))
@@ -77,4 +85,4 @@ except KeyboardInterrupt:
 print "Stopping capture..."
 clean_shutdown(p)
 p.set_state(gst.STATE_NULL)
-print "Done"
+print "Done. Saved as " + out_file
