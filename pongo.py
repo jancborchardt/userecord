@@ -10,6 +10,7 @@ print """
 - If you are conducting a RTA (= retrospective thinking aloud),
   use 'shift' to set the camera video next to the one already there.
 - For a custom filename use 'filename.ogv' as argument.
+- Reduce output file resolution with the width in pixels as argument.
 """
 
 import pygtk
@@ -51,43 +52,58 @@ def runBash(cmd):
     return out
 
 
-out_file = "pongo-"
+# Recording name
+out_file = "recording-"
 count = 1
-# Do not overwrite existing recordings
 while(os.path.isfile(out_file + str(count) + ".ogv")):
     count = count + 1
 
 out_file += str(count)
 out_file += ".ogv"
 
-# Automatically get screen dimensions
-out_w = int(runBash("xdpyinfo | grep dimensions | cut -d' ' -f7 | cut -d'x' -f1"))
-out_h = int(runBash("xdpyinfo | grep dimensions | cut -d' ' -f7 | cut -d'x' -f2"))
-
-cam_w = 300
-cam_h = 200
-cam_opacity = 0.8
-v4l_device = "/dev/video0"
-
-cam = True
-cam_x = out_w - cam_w
-cam_y = out_h - cam_h
-
-# Optional parameters for setting camera video position
-# TODO: additional option for lower quality recording for slower machines
 for arg in sys.argv:
-    if arg == "nocam":
-        cam = False
-        cam_opacity = 0 # hack, TODO: deactivate cam directly
-    if arg == "left":
-        cam_x = 0
-    if arg == "top":
-        cam_y = 0
     if re.search(".ogv", arg):
         if(os.path.isfile(arg)):
             print "File %s already exists!" % arg
         else:
             out_file = arg
+
+
+# Screen dimensions
+out_w = int(runBash("xdpyinfo | grep dimensions | cut -d' ' -f7 | cut -d'x' -f1"))
+out_h = int(runBash("xdpyinfo | grep dimensions | cut -d' ' -f7 | cut -d'x' -f2"))
+
+for arg in sys.argv:
+    if arg.isdigit():
+        if int(arg) > out_w:
+            print "Can not scale video up!"
+        else:
+            arg = int(arg)
+            out_h = out_h * arg / out_w
+            out_w = arg
+
+
+# Camera video
+cam = True
+cam_w = 320
+cam_h = 240
+# TODO: Implement camera video scaling as well
+# v4l2src seems to have problems with other values
+#cam_w = round(out_w / 4)
+#cam_h = round(cam_w * 3/4)
+cam_opacity = 0.8
+v4l_device = "/dev/video0"
+cam_x = out_w - cam_w
+cam_y = out_h - cam_h
+
+for arg in sys.argv:
+    if arg == "left":
+        cam_x = 0
+    elif arg == "top":
+        cam_y = 0
+    elif arg == "nocam":
+        cam = False
+        cam_opacity = 0 # hack, TODO: deactivate cam directly
 
 for arg in sys.argv:
     if arg == "shift":
@@ -97,11 +113,12 @@ for arg in sys.argv:
             cam_x -= cam_w
 
 
+# Do it!
 p = gst.parse_launch("""videomixer name = mix ! ffmpegcolorspace ! queue ! theoraenc ! oggmux name = mux ! filesink location = %s
 istximagesrc name = xsrc use-damage = false ! videorate ! video/x-raw-rgb,framerate = 10/1 ! ffmpegcolorspace ! videoscale method = 1 ! video/x-raw-yuv,width = %d,height = %d ! mix.sink_0
-v4l2src name = camsrc device = %s ! ffmpegcolorspace ! videorate ! video/x-raw-yuv,framerate = 10/1,width = 320,height = 240 ! queue ! videoscale ! ffmpegcolorspace ! video/x-raw-yuv,height = %d,height = %d ! mix.sink_1
+v4l2src name = camsrc device = %s ! ffmpegcolorspace ! videorate ! video/x-raw-yuv, framerate = 10/1, width = %d, height = %d ! queue ! videoscale ! ffmpegcolorspace ! video/x-raw-yuv,height = %d,height = %d ! mix.sink_1
 alsasrc name = asrc ! queue ! audioconvert ! vorbisenc ! mux.""" % \
-    (out_file, out_w, out_h, v4l_device, cam_w, cam_h))
+    (out_file, out_w, out_h, v4l_device, cam_w, cam_h, cam_w, cam_h))
 
 mix = p.get_by_name("mix")
 cam_pad = mix.get_pad("sink_1")
@@ -112,7 +129,7 @@ cam_pad.set_property("zorder", 1)
 
 
 p.set_state(gst.STATE_PLAYING)
-print "Capturing to %s ..." % out_file
+print "Capturing %sx%s video to %s ..." % (out_w, out_h, out_file)
 
 loop = gobject.MainLoop()
 try:
@@ -123,4 +140,4 @@ except KeyboardInterrupt:
 print "Stopping capture ..."
 clean_shutdown(p)
 p.set_state(gst.STATE_NULL)
-print "Done. Saved as %s" % out_file
+print "Successfully saved as %s" % out_file
