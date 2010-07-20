@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # Pongo, an inexpensive UI lab
-# Originally by Andreas Nilsson: http://www.andreasn.se/blog/?p = 96
+# Originally by Andreas Nilsson: http://www.andreasn.se/blog/?p=96
 # Requires python and istanbul: http://live.gnome.org/Istanbul
 
 print """
-Default camera position is bottom right.
+Default camera video position is bottom right.
 To change, use 'top' and 'left' as arguments.
 Disable camera with 'nocam'.
 If you are conducting a RTA (= retrospective thinking aloud),
@@ -71,7 +71,7 @@ cam = True
 cam_x = out_w - cam_w
 cam_y = out_h - cam_h
 
-# Optional parameters for setting cam position
+# Optional parameters for setting camera video position
 for arg in sys.argv:
     if arg == "nocam":
         cam = False
