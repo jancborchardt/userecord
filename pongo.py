@@ -4,11 +4,12 @@
 # Requires python and istanbul: http://live.gnome.org/Istanbul
 
 print """
-Default camera video position is bottom right.
-To change, use 'top' and 'left' as arguments.
-Disable camera with 'nocam'.
-If you are conducting a RTA (= retrospective thinking aloud),
-use 'shift' to set the camera video next to the one already there.
+- Default camera video position is bottom right.
+  To change, use 'top' and 'left' as arguments.
+- Disable camera with 'nocam'.
+- If you are conducting a RTA (= retrospective thinking aloud),
+  use 'shift' to set the camera video next to the one already there.
+- For a custom filename use 'filename.ogv' as argument.
 """
 
 import pygtk
@@ -23,6 +24,7 @@ import signal
 import subprocess
 import os.path
 import sys
+import re
 
 
 def clean_shutdown(p):
@@ -72,14 +74,20 @@ cam_x = out_w - cam_w
 cam_y = out_h - cam_h
 
 # Optional parameters for setting camera video position
+# TODO: additional option for lower quality recording for slower machines
 for arg in sys.argv:
     if arg == "nocam":
         cam = False
-        cam_opacity = 0
+        cam_opacity = 0 # hack, TODO: deactivate cam directly
     if arg == "left":
         cam_x = 0
     if arg == "top":
         cam_y = 0
+    if re.search(".ogv", arg):
+        if(os.path.isfile(arg)):
+            print "File %s already exists!" % arg
+        else:
+            out_file = arg
 
 for arg in sys.argv:
     if arg == "shift":
@@ -104,7 +112,7 @@ cam_pad.set_property("zorder", 1)
 
 
 p.set_state(gst.STATE_PLAYING)
-print "Capturing..."
+print "Capturing to %s ..." % out_file
 
 loop = gobject.MainLoop()
 try:
@@ -112,7 +120,7 @@ try:
 except KeyboardInterrupt:
   pass 
 
-print "Stopping capture..."
+print "Stopping capture ..."
 clean_shutdown(p)
 p.set_state(gst.STATE_NULL)
-print "Done. Saved as " + out_file
+print "Done. Saved as %s" % out_file
