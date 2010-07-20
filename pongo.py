@@ -76,14 +76,17 @@ for arg in sys.argv:
     if arg == "nocam":
         cam = False
         cam_opacity = 0
-    if arg == "shift":
-        cam_x -= cam_w
     if arg == "left":
         cam_x = 0
-        if arg == "shift":
-            cam_x += cam_w * 2
     if arg == "top":
         cam_y = 0
+
+for arg in sys.argv:
+    if arg == "shift":
+        if cam_x == 0:
+            cam_x += cam_w
+        else:
+            cam_x -= cam_w
 
 
 p = gst.parse_launch("""videomixer name = mix ! ffmpegcolorspace ! queue ! theoraenc ! oggmux name = mux ! filesink location = %s
