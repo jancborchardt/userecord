@@ -6,11 +6,11 @@
 print """
 - Default camera video position is bottom right.
   To change, use 'top' and 'left' as arguments.
-- Disable camera with 'nocam'.
-- If you are conducting a RTA (= retrospective thinking aloud),
-  use 'shift' to set the camera video next to the one already there.
+- Disable camera with 'nocam' as argument.
 - For a custom filename use 'filename.ogv' as argument.
 - Reduce output file resolution with the width in pixels as argument.
+
+Example: python pongo.py top left recording.ogv 640
 """
 
 import pygtk
@@ -89,6 +89,7 @@ cam_w = 320
 cam_h = 240
 # TODO: Implement camera video scaling as well
 # v4l2src seems to have problems with other values
+# This solution seems to work _sometimes_
 #cam_w = round(out_w / 4)
 #cam_h = round(cam_w * 3/4)
 cam_opacity = 0.8
@@ -104,13 +105,6 @@ for arg in sys.argv:
     elif arg == "nocam":
         cam = False
         cam_opacity = 0 # hack, TODO: deactivate cam directly
-
-for arg in sys.argv:
-    if arg == "shift":
-        if cam_x == 0:
-            cam_x += cam_w
-        else:
-            cam_x -= cam_w
 
 
 # Do it!
