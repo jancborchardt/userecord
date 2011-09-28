@@ -1,0 +1,119 @@
+<mockup version="1.0" skin="sketch" measuredW="1407" measuredH="588" mockupW="1379" mockupH="563">
+  <controls>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Button" x="880" y="300" w="105" h="35" measuredW="66" measuredH="28" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Record</text>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::TextInput" x="880" y="86" w="-1" h="-1" measuredW="105" measuredH="29" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Recording%20title</text>
+      </controlProperties>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::TitleWindow" x="359" y="34" w="691" h="377" measuredW="450" measuredH="400" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bottomheight>1</bottomheight>
+        <close>false</close>
+        <dragger>false</dragger>
+        <maximizeRestore>false</maximizeRestore>
+        <minimize>false</minimize>
+        <text>Pongo%20Usability%20Lab</text>
+        <topheight>33</topheight>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::Button" x="874" y="360" w="161" h="35" measuredW="66" measuredH="28" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Record</text>
+      </controlProperties>
+    </control>
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::HSlider" x="874" y="140" w="161" h="-1" measuredW="33" measuredH="11" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <value>100</value>
+      </controlProperties>
+    </control>
+    <control controlID="43" controlTypeID="com.balsamiq.mockups::Image" x="362" y="66" w="500" h="341" measuredW="500" measuredH="313" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <filter>true</filter>
+        <src>http%3A//farm3.static.flickr.com/2176/1491757256_6cb7e1d3f1.jpg</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::Label" x="874" y="115" w="-1" h="-1" measuredW="53" measuredH="25" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Quality</text>
+      </controlProperties>
+    </control>
+    <control controlID="45" controlTypeID="com.balsamiq.mockups::StickyNote" x="1060" y="57" w="337" h="396" measuredW="109" measuredH="123" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>-%20Free%20file%20name%20input%0A%20%0A-%20High%20%3D%20full%20resolution%2C%20low%20%3D%20half%20resolution.%0A%20%20%201%20or%203%20stages%20inbetween%3F%0A%20%0A-%20Webcam%20disappears%20from%20preview%20if%20unchecked%0A%20%0A%20%0A-So%20far%20not%20sure%20how%20to%20integrate%20those-%0A-%20Screenkey%20launchpad.net/screenkey%0A-%20DeskScribe%20launchpad.net/deskscribe%0A-%20Would%20be%20incredibly%20nice%20%3B%29%0A%20%20%20GazeHawk%20gazehawk.com%0A%20%0A-%20Starts%20recording%20to%20file%20live%2C%20minimizes%20to%20application%20indicator%20only%20needed%20for%20stopping%20when%20done.%20Ideally%20it%20would%20vanish%20completely.</text>
+      </controlProperties>
+    </control>
+    <control controlID="46" controlTypeID="com.balsamiq.mockups::StickyNote" x="18" y="15" w="326" h="460" measuredW="109" measuredH="123" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Pongo%20is%20a%20quick%20and%20easy%20picture-in-picture%20recording%20program%20mainly%20intended%20for%20usability%20testing.%0A%20%0AIt%20does%20not%20separate%20screen%20and%20video%20streams%20but%20instead%20puts%20out%20one%20single%20file%20with%20webcam%2C%20keyboard%20inputs%20etc.%20transparently%20overlaid.%0A%20%0AA%20preview%20shows%20how%20the%20output%20will%20look%20like%20and%20makes%20obvious%20if%20something%20does%20not%20work%2C%20for%20example%20improper%20lighting%20or%20webcam%20not%20working%20at%20all.%0A%20%0AOptions%20are%20kept%20to%20a%20minimum%20and%20preferences%20saved%20for%20later%20uses.%0A%20%0AIt%20should%20be%20a%20single%20installable%20with%20all%20dependencies%2C%20useful%20for%20testing%20in%20the%20field%20or%20when%20offline.</text>
+      </controlProperties>
+    </control>
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="874" y="189" w="161" h="152" measuredW="121" measuredH="150" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%5Bx%5D%20Enable%20webcam%0A%20%0ATrack%0A%5B%20%5D%20Keypresses%0A-%5B%20%5D%20Mouse%20clicks-%0A-%5B%20%5D%20Eye%20movement-</text>
+      </controlProperties>
+    </control>
+    <control controlID="48" controlTypeID="com.balsamiq.mockups::Webcam" x="717" y="291" w="148" h="122" measuredW="177" measuredH="145" zOrder="11" locked="false" isInGroup="-1"/>
+    <control controlID="49" controlTypeID="com.balsamiq.mockups::TextInput" x="874" y="78" w="164" h="-1" measuredW="105" measuredH="29" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>-Recording%20title-</text>
+      </controlProperties>
+    </control>
+    <control controlID="51" controlTypeID="com.balsamiq.mockups::Label" x="874" y="151" w="-1" h="-1" measuredW="28" measuredH="25" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <color>8554646</color>
+        <text>Low</text>
+      </controlProperties>
+    </control>
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::Label" x="1001" y="150" w="-1" h="-1" measuredW="34" measuredH="25" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <color>8554646</color>
+        <text>High</text>
+      </controlProperties>
+    </control>
+    <control controlID="53" controlTypeID="com.balsamiq.mockups::VRule" x="859" y="66" w="-1" h="339" measuredW="5" measuredH="100" zOrder="15" locked="false" isInGroup="-1"/>
+    <control controlID="62" controlTypeID="com.balsamiq.mockups::Canvas" x="648" y="530" w="50" h="37" measuredW="100" measuredH="70" zOrder="16" locked="false" isInGroup="-1"/>
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::RadioButtonGroup" x="684" y="552" w="-1" h="-1" measuredW="19" measuredH="14" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%28o%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="64" controlTypeID="com.balsamiq.mockups::RadioButton" x="682" y="528" w="-1" h="-1" measuredW="21" measuredH="22" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="65" controlTypeID="com.balsamiq.mockups::RadioButton" x="648" y="548" w="-1" h="-1" measuredW="21" measuredH="22" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="66" controlTypeID="com.balsamiq.mockups::RadioButton" x="648" y="528" w="-1" h="-1" measuredW="21" measuredH="22" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::Label" x="703" y="537" w="-1" h="-1" measuredW="52" measuredH="25" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Position</text>
+      </controlProperties>
+    </control>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::StickyNote" x="632" y="413" w="317" h="165" measuredW="109" measuredH="123" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Is%20it%20necessary%20to%20be%20able%20to%20position%20the%20webcam%20video%20freely%3F%20Would%20dragging%20and%20snap-to-edges%20feasible%3F%0AIs%20the%20radiobutton%20hack%20better%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="70" controlTypeID="com.balsamiq.mockups::StickyNote" x="374" y="426" w="237" h="118" measuredW="109" measuredH="123" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>If%20a%20more%20sophisticated%20program%20is%20needed%2C%20have%20a%20look%20at%20Kazam%3A%20launchpad.net/kazam</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
